@@ -1,0 +1,3 @@
+[`Looping Sketch!!!`]()
+
+This week, we learned how to use looping functions to handle multiple calculations at once between a range of numbers. This saves the task of writing each individual task multiple times with slight variation. For this week's sketch, I used the `for loop` variable to create multiple patterns of parallel lines. The `for loop` in this case determines that variable `i` is greater than 20, but less than 400 with a looping additive range of 20. I did not have many problems with this assignment, just lots of experimentation to get the shapes and patterns that I wanted to assemble the composition. There is nothing this week that I want to discuss further, nor were any of my classmates involved in this process. 
