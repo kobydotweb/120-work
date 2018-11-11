@@ -33,4 +33,4 @@ None.
 
 Lastly,
 
-![Image of Atom](12345pp.png)
+![Image of Atom](12345.png)
