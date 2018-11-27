@@ -7,7 +7,7 @@ function setup() {
 }
 
 function mousePressed() {
-    let r = random(0, 100);
+    let r = random(1, 100);
     let b = new Circle(mouseX, mouseY, r);
     Circles.push(b);
 }
