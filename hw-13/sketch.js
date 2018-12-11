@@ -1,31 +1,32 @@
 let bubbles = [];
 let flower;
-let kittens = [];
+let images = [];
 
 function preload() {
   flower = loadImage('images/flower.png');
-  for (let i = 0; i < 3; i++) {
-    kittens[i] = loadImage(`images/png${i}.png`);
+
+  for (let i = 0; i < 51; i++) {
+    images[i] = loadImage(`images/png${i}.png`);
   }
-  for (let i = 4; i < 10; i++) {
-      kittens[i] = loadImage(`images/gif${i}.gif`);
-  }
-
-
-
-
 
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (let i = 0; i < 10; i++) {
-    let x = random(width);
-    let y = random(height);
-    let r = random(30, 250);
-    // let kitten = random(kittens);
-    let b = new Bubble(x, y, r);
-    bubbles.push(b);
+  let r;
+  let x;
+  let y;
+  let speedX;
+  let speedY;
+  frameRate(60);
+
+  for (let i = 0; i < 200; i++) {
+    r = random(40, 250);
+    x = random(r, width - r);
+    y = random(r, height - r);
+    speedX = random(-2.5,2.5);
+    speedY = random(-2.5,2.5);
+    bubbles.push(new Bubble(x, y, r, speedX, speedY));
   }
 }
 
@@ -35,42 +36,46 @@ function mousePressed() {
   }
 }
 
-
 function draw() {
   background(0);
   for (let i = 0; i < bubbles.length; i++) {
     bubbles[i].move();
     bubbles[i].show();
+
+    if(bubbles[i].x + bubbles[i].r > width || bubbles[i].x < 0)
+    {
+      bubbles[i].speedX = bubbles[i].speedX * -1;
+    }
+    if(bubbles[i].y + bubbles[i].r > height || bubbles[i].y < 0)
+    {
+      bubbles[i].speedY = bubbles[i].speedY * -1;
+    }
   }
 }
 
 class Bubble {
-  constructor(x, y, r, img) {
+  constructor(x, y, r, speedX, speedY, img) {
+    this.speedX = speedX;
+    this.speedY = speedY;
     this.x = x;
     this.y = y;
     this.r = r;
-    this.kitten = random(kittens);
-
+    this.image = random(images);
   }
 
   clicked(px, py) {
-    //let d = dist(px, py, this.x, this.y);
-    //if (d < this.r) {
     if (px > this.x && px < this.x + this.r && py > this.y && py < this.y + this.r) {
-      this.kitten = flower; //random(kittens);
+      this.image = flower;
     }
   }
 
   move() {
-    this.x = this.x + random(-2, 2);
-    this.y = this.y + random(-2, 2);
+    this.x = this.x + this.speedX;
+    this.y = this.y + this.speedY;
   }
 
+
   show() {
-    image(this.kitten, this.x, this.y, this.r, this.r);
-    // stroke(255);
-    // strokeWeight(4);
-    // fill(this.brightness, 125);
-    // ellipse(this.x, this.y, this.r * 2);
+    image(this.image, this.x, this.y, this.r, this.r);
   }
 }
